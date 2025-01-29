@@ -6,13 +6,15 @@
 */
 let game_state = 0;
 let x = 600;
-let y = 300;
+let y = 400;
 let t1 = 600;
 let t2 = 400;
 let r = 0;
 let n = 0;
 let f = 0;
 let h = 0;
+let p = 600;
+let speed = 5;
 function setup() {
   createCanvas(1200, 600);
   textAlign(CENTER, CENTER)
@@ -49,7 +51,25 @@ function draw() {
     text("👮", 180, 200)
     text("👴", 1080, 500)
     text("👶", x, y)
+    textSize(150);
+    text("🌳", 1000, 100)
+    text("🏎️", p, 250);
+    textSize(40)
+    text("💵", 980, 200)
+   
+
   }
+    p += speed;
+     if (x < 1100 && x > 900 && y > 0 && y < 200) {
+      game_state = 6;
+    }
+    if (x < p + 50 && x > p - 50 && y > 200 && y < 300) {
+      game_state = 5;
+    }
+
+    if (p === 1200 || p === 0) {
+      speed *= -1;
+    }
     if (kb.pressing("ArrowUp")){
        y = y - 5;
     }
@@ -90,7 +110,7 @@ function draw() {
      }
      if (kb.pressing("n") && h === 0) {
       textSize(20)
-      text("Oh! Allright.", 300, 100)
+      text("Oh! Alright.", 300, 100)
      }
     
      if (kb.pressing("t") && x < 230 && y < 250 && x > 50 && y > 150 && r === 1){
@@ -139,7 +159,17 @@ function draw() {
     background(0,154,23); 
     textSize(30)
     text("Perfect! The Trafficker has been arrested!", 600, 300)
-  }
+  } else if (game_state === 5) {
+    // Game over state (run over)
+    background(0, 154, 23);
+    textSize(30);
+    text("You got run over", 600, 300);
+}else if (game_state === 6) {
+    // Game over state (run over)
+    background(0, 154, 23);
+    textSize(30);
+    text("You got crushed by a falling tree", 600, 300);
+}
 
   
 }
